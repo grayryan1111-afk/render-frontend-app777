@@ -126,7 +126,8 @@ value={s.id}>
 {quote.service}
           </p>
           <p>
-            <b>Units:</b> {quote.units}
+            <b>Units:</b> 
+{quote.units}
           </p>
           <p>
             <b>Subtotal:</b> ${quote.subtotal}
@@ -135,7 +136,8 @@ value={s.id}>
             <b>Tax:</b> ${quote.tax}
           </p>
           <p>
-            <b>Total:</b> ${quote.total}
+            <b>Total:</b> $
+{quote.total}
           </p>
         </div>
       )}
