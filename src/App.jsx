@@ -88,3 +88,48 @@ export default function App() {
 
       <br />
       <br />
+<button
+        onClick={createQuote}
+        style={{
+          padding: "10px 20px",
+          background: "#4CAF50",
+          border: "none",
+          borderRadius: "5px",
+          color: "white",
+          fontSize: "16px",
+          cursor: "pointer",
+        }}
+      >
+        Generate Quote
+      </button>
+
+      {quote && (
+        <div
+          style={{
+            marginTop: "25px",
+            padding: "15px",
+            background: "#1c2b45",
+            borderRadius: "8px",
+          }}
+        >
+          <h2>Quote Result</h2>
+          <p>
+            <b>Service:</b> {quote.service}
+          </p>
+          <p>
+            <b>Units:</b> {quote.units}
+          </p>
+          <p>
+            <b>Subtotal:</b> ${quote.subtotal}
+          </p>
+          <p>
+            <b>Tax:</b> ${quote.tax}
+          </p>
+          <p>
+            <b>Total:</b> ${quote.total}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
