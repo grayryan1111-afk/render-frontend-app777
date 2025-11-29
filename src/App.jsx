@@ -11,7 +11,7 @@ export default function App() {
   const [units, setUnits] = useState("");
   const [quote, setQuote] = useState(null);
 
-  // Load services on start
+  // Load all services on first load
   useEffect(() => {
     api
       .get("/services")
@@ -47,12 +47,18 @@ export default function App() {
     >
       <h1>ClearView Quoting</h1>
 
+      {/* SERVICE SELECTOR */}
       <label>Service:</label>
       <br />
       <select
         value={serviceId}
         onChange={(e) => setServiceId(e.target.value)}
-        style={{ padding: "10px", width: "250px", marginTop: "10px" }}
+        style={{
+          padding: "10px",
+          width: "250px",
+          marginTop: "10px",
+          borderRadius: "5px",
+        }}
       >
         <option value="">-- Select a service --</option>
         {services.map((s) => (
@@ -65,29 +71,36 @@ export default function App() {
       <br />
       <br />
 
+      {/* UNITS INPUT */}
       <label>
         Units (
         {services.find((s) => s.id == serviceId)?.unitLabel || "units"}):
       </label>
       <br />
-
       <input
         type="number"
         value={units}
         onChange={(e) => setUnits(e.target.value)}
         placeholder="Enter units"
-        style={{ padding: "10px", width: "250px", marginTop: "10px" }}
+        style={{
+          padding: "10px",
+          width: "250px",
+          marginTop: "10px",
+          borderRadius: "5px",
+        }}
       />
 
       <br />
       <br />
 
+      {/* GENERATE QUOTE BUTTON */}
       <button
         onClick={createQuote}
         style={{
           padding: "10px 20px",
           background: "#4CAF50",
           border: "none",
+          borderRadius: "5px",
           color: "white",
           fontSize: "16px",
           cursor: "pointer",
@@ -96,6 +109,7 @@ export default function App() {
         Generate Quote
       </button>
 
+      {/* QUOTE RESULT */}
       {quote && (
         <div
           style={{
