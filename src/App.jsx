@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
+
 export default function App() {
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState("");
   const [units, setUnits] = useState("");
   const [quote, setQuote] = useState(null);
-// Load all services from backend
+
+  // Load services on start
   useEffect(() => {
     api
       .get("/services")
       .then((res) => setServices(res.data))
       .catch(() => alert("Cannot load services"));
   }, []);
- // Create quote
+
+  // Create quote
   function createQuote() {
     if (!serviceId || !units) {
       alert("Select a service and enter units");
-      return;  }
+      return;
+    }
+
     api
       .post("/quotes", {
         serviceId,
@@ -28,6 +34,7 @@ export default function App() {
       .then((res) => setQuote(res.data))
       .catch(() => alert("Error generating quote"));
   }
+
   return (
     <div
       style={{
@@ -39,12 +46,13 @@ export default function App() {
       }}
     >
       <h1>ClearView Quoting</h1>
- <label>Service:</label>
+
+      <label>Service:</label>
       <br />
       <select
         value={serviceId}
         onChange={(e) => setServiceId(e.target.value)}
-        style={{ padding: "10px", width: "100%", marginTop: "5px" }}
+        style={{ padding: "10px", width: "250px", marginTop: "10px" }}
       >
         <option value="">-- Select a service --</option>
         {services.map((s) => (
@@ -53,19 +61,28 @@ export default function App() {
           </option>
         ))}
       </select>
-  <br />
+
       <br />
-   <label>Units:</label>
+      <br />
+
+      <label>
+        Units (
+        {services.find((s) => s.id == serviceId)?.unitLabel || "units"}):
+      </label>
+      <br />
+
       <input
         type="number"
         value={units}
         onChange={(e) => setUnits(e.target.value)}
         placeholder="Enter units"
-        style={{ padding: "10px", width: "100%", marginTop: "5px" }}
+        style={{ padding: "10px", width: "250px", marginTop: "10px" }}
       />
-   <br />
+
       <br />
- <button
+      <br />
+
+      <button
         onClick={createQuote}
         style={{
           padding: "10px 20px",
@@ -78,7 +95,8 @@ export default function App() {
       >
         Generate Quote
       </button>
- {quote && (
+
+      {quote && (
         <div
           style={{
             marginTop: "25px",
@@ -89,7 +107,7 @@ export default function App() {
         >
           <h2>Quote Result</h2>
           <p>
-            <b>Service:</b> {quote.service.name}
+            <b>Service:</b> {quote.service}
           </p>
           <p>
             <b>Units:</b> {quote.units}
