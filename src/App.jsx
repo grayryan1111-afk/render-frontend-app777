@@ -44,3 +44,46 @@ export default function App() {
       }}
     >
       <h1>ClearView Quoting</h1>
+<label>Service:</label>
+      <br />
+      <select
+        value={serviceId}
+        onChange={(e) => setServiceId(e.target.value)}
+        style={{
+          padding: "10px",
+          width: "250px",
+          marginTop: "10px",
+          borderRadius: "5px",
+        }}
+      >
+        <option value="">-- Select a service --</option>
+        {services.map((s) => (
+          <option key={s.id} value={s.id}>
+            {s.name} (${s.pricePerUnit}/unit)
+          </option>
+        ))}
+      </select>
+
+      <br />
+      <br />
+
+      <label>
+        Units (
+        {services.find((s) => s.id == serviceId)?.unitLabel || "units"}):
+      </label>
+      <br />
+      <input
+        type="number"
+        value={units}
+        onChange={(e) => setUnits(e.target.value)}
+        placeholder="Enter units"
+        style={{
+          padding: "10px",
+          width: "250px",
+          marginTop: "10px",
+          borderRadius: "5px",
+        }}
+      />
+
+      <br />
+      <br />
