@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } 
+from "react";
 import axios from "axios";
 
 const api = axios.create({
@@ -8,13 +9,16 @@ const api = axios.create({
 export default function App() {
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState("");
-  const [units, setUnits] = useState("");
-  const [quote, setQuote] = useState(null);
+  const [units, setUnits] = 
+useState("");
+  const [quote, setQuote] = 
+useState(null);
 
   useEffect(() => {
     api
       .get("/services")
-      .then((res) => setServices(res.data))
+      .then((res) => 
+setServices(res.data))
       .catch(() => alert("Cannot load services"));
   }, []);
 
@@ -29,8 +33,10 @@ export default function App() {
         serviceId,
         units: Number(units),
       })
-      .then((res) => setQuote(res.data))
-      .catch(() => alert("Error generating quote"));
+      .then((res) => 
+setQuote(res.data))
+      .catch(() => alert("Error 
+generating quote"));
   }
 
   return (
